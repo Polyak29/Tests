@@ -1,0 +1,37 @@
+1.Выводит имена всех продавцов, имеющих заказы от Seamens
+
+SELECT s.Name FROM
+Salesperson s
+JOIN Orders o
+ON s.ID=o.salesperson_id
+JOIN Customer c
+ON c.ID=o.cust_id
+WHERE c.Name=Seamens;
+
+2.Выводит имена всех продавцов, не имеющих заказы от Seamens
+
+SELECT s.Name FROM
+Salesperson s
+JOIN Orders o
+ON s.ID=o.salesperson_id
+JOIN Customer c
+ON c.ID=o.cust_id
+WHERE c.Name<>Seamens;
+
+3.Выводит имена всех продавцов, имеющих два и более заказов
+
+SELECT s.Name,COUNT(o.cust_id) AS order FROM
+Salesperson s
+JOIN Orders o
+ON s.ID=o.salesperson_id
+JOIN Customer c
+ON c.ID=o.cust_id
+WHERE order>=2
+GROUP BY s.salesperson_id,s.Name;
+
+4.Вставляет в таблицу TopSales (Name, Age) записи обо всех продавцах, зарплата которых больше 100 000.
+
+CREATE VIEW TopSales
+AS SELECT Name,AGE FROM Salesperson
+WHERE Salesperson.Salary>100000;
+SELECT * FROM TopSales;
